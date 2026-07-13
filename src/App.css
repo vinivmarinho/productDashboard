@@ -1,20 +1,46 @@
 .main {
     display: flex;
-    min-height: 100vh;
+    min-height: 100dvh;
 }
 .side-bar {
     display: flex;
     flex-direction: column;
     
-    width: 250px;
-    min-height: 100vh;
+    flex: 0 0 250px;
+    min-height: 100dvh;
     
     background-color: #111827;
     color: #fff;
 
     padding: 24px 16px;
+
 }
 .content {
-  flex-grow: 1;
+  flex: 1;
+  min-width: 0;
   padding: 20px;
 }
+
+@media (max-width: 768px) {
+  .main {
+    flex-direction: column;
+  }
+
+  .side-bar {
+    flex: none;
+    width: 100%;
+    min-height: auto;
+    padding: 16px 20px;
+  }
+
+  .content {
+    padding: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .content {
+    padding: 12px;
+  }
+}
+

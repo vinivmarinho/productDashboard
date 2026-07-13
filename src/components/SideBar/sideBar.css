@@ -37,3 +37,30 @@
   background-color: #2563eb;
   color: white;
 }
+
+@media (max-width: 768px) {
+  .logo {
+    margin-bottom: 16px;
+    justify-content: center;
+  }
+
+  .nav {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .nav a {
+    flex: 1 1 150px;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo {
+    font-size: 1.25rem;
+  }
+
+  .nav a {
+    padding: 10px 12px;
+  }
+}
