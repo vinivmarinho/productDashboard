@@ -25,7 +25,6 @@ export default function Header() {
                 </button>
             </div>
 
-            
         </header>
     )
 }
