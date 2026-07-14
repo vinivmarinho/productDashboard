@@ -3,6 +3,7 @@ import './App.css';
 import Header from './components/Header/Header';
 import SideBar from './components/SideBar/SideBar';
 import SearchBar from './components/SearchBar/SearchBar';
+import Table from "./components/Table/Table";
 
 function App() {
 
@@ -15,6 +16,7 @@ function App() {
       <div className="content">
         <Header />
         <SearchBar />
+        <Table />
       </div>
     </div>
   )

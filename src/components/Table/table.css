@@ -1,0 +1,95 @@
+.products-table {
+    width: 100%;
+
+    border-collapse: collapse;
+
+    background: white;
+
+    border: 1px solid #E5E7EB;
+    border-radius: 16px;
+
+    overflow: hidden;
+}
+
+.products-table thead {
+    background: #F9FAFB;
+}
+
+.products-table th {
+    padding: 18px 24px;
+
+    text-align: left;
+
+    font-size: 1.2rem;
+    font-weight: 600;
+
+    color: #374151;
+}
+
+.products-table td {
+    padding: 18px 24px;
+
+    border-top: 1px solid #F1F5F9;
+
+    color: #111827;
+}
+
+.products-table tbody tr {
+    transition: .2s;
+}
+
+.products-table tbody tr:hover {
+    transition: .2s;
+    background: #FAFAFA;
+}
+
+.status {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 6px 12px;
+
+    border-radius: 999px;
+
+    font-size: .85rem;
+    font-weight: 600;
+}
+
+.status.active {
+    background: #DCFCE7;
+    color: #15803D;
+}
+
+.status.inactive {
+    background: #FEE2E2;
+    color: #DC2626;
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+}
+
+.actions button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 38px;
+    height: 38px;
+
+    background: white;
+
+    border: 1px solid #E5E7EB;
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    transition: .2s;
+}
+
+.actions button:hover {
+    background: #F3F4F6;
+}
