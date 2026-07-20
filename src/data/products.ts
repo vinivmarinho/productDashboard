@@ -13,3 +13,22 @@ export type Product = {
 /* Array de produtos do tipo "PRODUCT" */
 export const products: Product[] = [];
 
+
+/* Cria um produto e adiciona ele ao array "products" */
+function createProduct(name: string, category: Product["category"], price: number, stock: number, status: Product["status"]): Product {
+    const id = products.length + 1;
+
+    const product = {
+        id,
+        name,
+        category,
+        price,
+        stock,
+        status
+    };
+
+    products.push(product);
+    console.log(`Produto ${name} criado com sucesso`);
+    return product;
+}
+
