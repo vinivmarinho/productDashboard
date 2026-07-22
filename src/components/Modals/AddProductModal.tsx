@@ -1,12 +1,27 @@
 import "./addProductModal.css";
 import { X } from "lucide-react";
+import { useState } from "react";
 
 /*Define as propriedades que o componente AddProductModal recebe */
 type Props = {
     onClose: () => void;
 };
 
+/* Pegar os valores de cada input. Como => Usando value e estados */
 export function AddProductModal({onClose}: Props) {
+    /* Estados*/
+    const [name, setName] = useState("");
+    const [price, setPrice] = useState("");
+    const [stock, setStock] = useState("");
+    const [status, setStatus] = useState("");
+    const [category, setCategory] = useState("");
+
+    /* Função que chama a criação do produto */
+    function handleSubmit() {
+        /* Colocar a função "createProduct" */
+        
+    };
+
     return(
         <div className="modal-overlay">
             <div className="modal-content">
@@ -15,26 +30,53 @@ export function AddProductModal({onClose}: Props) {
                 </button>
                 <h2>Adicionar Produto</h2>
 
-                <form>
+                <form onSubmit={handleSubmit}>
                     <div className="form-group">
                         <label htmlFor="product-name">Nome:</label>
-                        <input id="product-name" placeholder="Nome do produto"></input>
+                        <input 
+                            id="product-name" 
+                            placeholder="Nome do produto"
+                            value={name}
+                            onChange={(event) => setName(event.target.value)}
+                            required
+                            >
+                        </input>
                     </div>
 
                     <div className="form-group">
                         <label htmlFor="price">Preço</label>
-                            <input type="number" placeholder="Preço do produto"></input>
+                            <input 
+                            type="number" 
+                            placeholder="Preço do produto"
+                            value={price}
+                            onChange={(event) => setPrice(event.target.value)}
+                            required
+                            >
+                            </input>
                     </div>
 
                     <div className="form-group">
                         <label htmlFor="stock">Quantidade em estoque</label>
-                            <input type="number" placeholder="Estoque"></input>
+                            <input 
+                            type="number" 
+                            placeholder="Estoque"
+                            value={stock}
+                            onChange={(event) => setStock(event.target.value)}
+                            required
+                            >
+                                
+                            </input>
                     </div>
 
                     <div className="form-group">
                         <label htmlFor="status">Status</label>
-                        <select id="status">
-                            <option disabled selected>Selecione o Status</option>
+                        <select 
+                        id="status"
+                        value={status}
+                        onChange={(event) => setStatus(event.target.value)}
+                        required
+                        >
+                            <option value="" disabled selected>Selecione o Status</option>
                             <option>Ativo</option>
                             <option>Inativo</option>
                         </select>
@@ -42,13 +84,20 @@ export function AddProductModal({onClose}: Props) {
 
                     <div className="form-group">
                         <label htmlFor="category">Categoria</label>
-                        <select id="category">
-                            <option disabled selected>Categoria do produto</option>
-                            <option>Eletrônicos</option>
-                            <option>Acessórios</option>
-                            <option>Móveis</option>
+                        <select 
+                        id="category"
+                        value={category}
+                        onChange={(event) => setCategory(event.target.value)}
+                        required
+                        >
+                            <option value="" disabled selected>Categoria do produto</option>
+                            <option value="Eletrônicos">Eletrônicos</option>
+                            <option value="Acessórios">Acessórios</option>
+                            <option value="Móveis">Móveis</option>
                         </select>
                     </div>
+
+                    <button type="submit" className="btn-submit">Cadastrar Produto</button>
                 </form>
                 
             </div>
