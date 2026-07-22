@@ -1,6 +1,7 @@
 import "./addProductModal.css";
 import { X } from "lucide-react";
 import { useState } from "react";
+import { createProduct } from "../../data/products";
 
 /*Define as propriedades que o componente AddProductModal recebe */
 type Props = {
@@ -19,7 +20,7 @@ export function AddProductModal({onClose}: Props) {
     /* Função que chama a criação do produto */
     function handleSubmit() {
         /* Colocar a função "createProduct" */
-        
+        createProduct(name, category, Number(price), Number(stock), status)
     };
 
     return(
@@ -91,7 +92,7 @@ export function AddProductModal({onClose}: Props) {
                         required
                         >
                             <option value="" disabled selected>Categoria do produto</option>
-                            <option value="Eletrônicos">Eletrônicos</option>
+                            <option value="Electrônicos">Eletrônicos</option>
                             <option value="Acessórios">Acessórios</option>
                             <option value="Móveis">Móveis</option>
                         </select>

@@ -4,10 +4,10 @@
 export type Product = {
     id: number;
     name: string;
-    category: "Electronicos" | "Acessórios" | "Móveis";
+    category: string;
     price: number;
     stock: number;
-    status: "Ativo" | "Inativo";
+    status: string;
 }
 // Primeiro busca products no localStore
 const savedProducts = localStorage.getItem("products");
@@ -16,7 +16,7 @@ export const products: Product[] = savedProducts ? JSON.parse(savedProducts): []
 
 
 /* Cria um produto e adiciona ele ao array "products" */
-export function createProduct(name: string, category: Product["category"], price: number, stock: number, status: Product["status"]): Product {
+export function createProduct(name: string, category: string, price: number, stock: number, status: string): Product {
     const id = products.length + 1;
 
     const product = {
@@ -29,7 +29,7 @@ export function createProduct(name: string, category: Product["category"], price
     };
 
     products.push(product);
-    console.log(`Produto ${name} criado com sucesso`);
+    alert(`Produto ${name} criado com sucesso`);
 
     localStorage.setItem("products", JSON.stringify(products));
     return product;
