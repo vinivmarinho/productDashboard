@@ -78,8 +78,8 @@ export function AddProductModal({onClose}: Props) {
                         required
                         >
                             <option value="" disabled selected>Selecione o Status</option>
-                            <option>Ativo</option>
-                            <option>Inativo</option>
+                            <option value="active">Ativo</option>
+                            <option value="inactive">Inativo</option>
                         </select>
                     </div>
 

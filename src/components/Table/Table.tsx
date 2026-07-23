@@ -1,6 +1,19 @@
 import { Pencil, Trash2 } from "lucide-react";
 import "./table.css";
+import { readAllProducts } from "../../data/products";
+import { useState, useEffect } from "react";
+import type { Product } from "../../data/products";
+
 export default function Table() {
+    // Armazena um array de `Product` (o type alias) e começa vazio
+    // Depois, ao chamar `setProducts(readAllProducts)`, ele será atualizado com os produtos do localStorage
+    const [products, setProducts] = useState<Product[]>([]); 
+
+    useEffect(() => {
+        setProducts(readAllProducts());
+    }, [])
+    
+    
     return(
         <table className="products-table">
             <thead>
@@ -8,35 +21,39 @@ export default function Table() {
                     <th>Nome</th>
                     <th>Categoria</th>
                     <th>Preço</th>
-                    <th>Estoque</th>
+                    <th>QTD. Estoque</th>
                     <th>Status</th>
                     <th>Ações</th>
                 </tr>
             </thead>
 
             <tbody>
-                <tr>
-                    <td>Noteboook Dell </td>
-                    <td>Eletrônicos</td>
-                    <td>R$ 4.500,00</td>
-                    <td>15</td>
-                    <td>
-                        <span className="status active">
-                            Ativo
-                        </span>
-                    </td>
+                
+                {/* Mostrando os produtos salvos no localStorage */}
+                {products.map((product) => (
+                    <tr key={product.id}>    
+                        <td>{product.name}</td> 
+                        <td>{product.category}</td>
+                        <td>R${product.price.toFixed(2)}</td>
+                        <td>{product.stock}</td>
+                        <td>
+                            <span className={`status ${product.status}`}>
+                                {product.status === "active" ? "Ativo" : "Inativo"}
+                            </span>
+                        </td>
 
-                    <td className="actions">
-                        <button>
-                            <Pencil size={18}/>
-                        </button>
+                        <td className="actions">
+                            <button onClick={showProducts}>
+                                <Pencil size={18}/>
+                            </button>
 
-                        <button>
-                            <Trash2 size={18} />
-                        </button>
-                    </td>
-
-                </tr>   
+                            <button>
+                                <Trash2 size={18} />
+                            </button>
+                        </td> 
+                    </tr>
+                ))}
+               
             </tbody>
         </table>
     )

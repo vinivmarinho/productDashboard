@@ -71,8 +71,8 @@ export function updateProduct( id: number, updates: Partial<Omit<Product, "id">>
     console.log("Produto atualizado")
 };
 
-export function ReadAllProducts():Product[] {
+export function readAllProducts():Product[] {
     /* Pega array no localStorage e depois mostra ele em formato JSON*/
     const savedProducts = localStorage.getItem("products");
-    return savedProducts ? JSON.parse(savedProducts) : []
+    return savedProducts ? JSON.parse(savedProducts) : [];
 };
