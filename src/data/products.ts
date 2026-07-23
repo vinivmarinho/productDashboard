@@ -29,7 +29,7 @@ export function createProduct(name: string, category: string, price: number, sto
     };
 
     products.push(product);
-    alert(`Produto ${name} criado com sucesso`);
+    console.log(`Produto ${name} criado com sucesso`);
 
     localStorage.setItem("products", JSON.stringify(products));
     return product;

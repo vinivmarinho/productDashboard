@@ -2,6 +2,7 @@ import "./addProductModal.css";
 import { X } from "lucide-react";
 import { useState } from "react";
 import { createProduct } from "../../data/products";
+import { toast } from "react-toastify";
 
 /*Define as propriedades que o componente AddProductModal recebe */
 type Props = {
@@ -18,9 +19,16 @@ export function AddProductModal({onClose}: Props) {
     const [category, setCategory] = useState("");
 
     /* Função que chama a criação do produto */
-    function handleSubmit() {
-        /* Colocar a função "createProduct" */
-        createProduct(name, category, Number(price), Number(stock), status)
+    function  handleSubmit(event: React.SubmitEvent) {
+        event.preventDefault();
+        try {
+            createProduct(name, category, Number(price), Number(stock), status);
+            toast.success("Produto criado com sucesso");
+            
+        } catch(error) {
+            toast.error("Erro ao criar o produto");
+        }
+        onClose();
     };
 
     return(
