@@ -6,7 +6,7 @@ O projeto tem como objetivo praticar conceitos do desenvolvimento Front-End mode
 
 ## Aprendizados
 Durante o desenvolvimento deste projeto, documentei os principais conceitos praticados, desafios encontrados e as soluções adotadas.
-➡️ **Veja o arquivo:** [LEARNINGS.MD](./LEARNINGS.MD)
+➡️ **Veja o arquivo:** [LEARNINGS.MD](LEARNINGS.MD)
 ## 🚀 Funcionalidades 
 
 - ✅ Listagem de produtos
