@@ -13,7 +13,7 @@ export default function Table() {
         setProducts(readAllProducts());
     }, [])
     
-    
+
     return(
         <table className="products-table">
             <thead>
@@ -43,7 +43,7 @@ export default function Table() {
                         </td>
 
                         <td className="actions">
-                            <button onClick={showProducts}>
+                            <button>
                                 <Pencil size={18}/>
                             </button>
 
