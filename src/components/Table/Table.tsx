@@ -1,6 +1,6 @@
 import { Pencil, Trash2 } from "lucide-react";
 import "./table.css";
-import { readAllProducts } from "../../data/products";
+import { readAllProducts, deleteProduct } from "../../data/products";
 import { useState, useEffect } from "react";
 import type { Product } from "../../data/products";
 
@@ -13,6 +13,9 @@ export default function Table() {
         setProducts(readAllProducts());
     }, [])
     
+    function handleDelete(id: number) {
+        deleteProduct(id)
+    };
 
     return(
         <table className="products-table">
@@ -47,7 +50,7 @@ export default function Table() {
                                 <Pencil size={18}/>
                             </button>
 
-                            <button>
+                            <button onClick={() => handleDelete(product.id)}>
                                 <Trash2 size={18} />
                             </button>
                         </td> 
