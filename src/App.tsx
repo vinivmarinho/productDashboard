@@ -5,8 +5,14 @@ import SearchBar from './components/SearchBar/SearchBar';
 import Table from "./components/Table/Table";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { readAllProducts, type Product } from "./data/products.ts";
+import { useState } from "react";
 
 function App() {
+  // Armazena um array de `Product` (o Type Alias ) e começa vazio
+  // setProducts é passado como props para "Table"
+  const [products, setProducts] = useState<Product[]>([]);
+
 
   return (
     <>
@@ -18,7 +24,8 @@ function App() {
         <div className="content">
           <Header />
           <SearchBar />
-          <Table />
+          {/* TODO: Passar prop "products" e "setProducts"*/}
+          <Table products={products} setProducts={setProducts}  />
         </div>
       </div>
       <ToastContainer />

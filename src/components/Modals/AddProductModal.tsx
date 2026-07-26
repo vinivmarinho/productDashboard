@@ -9,7 +9,6 @@ type Props = {
     onClose: () => void;
 };
 
-/* Pegar os valores de cada input. Como => Usando value e estados */
 export function AddProductModal({onClose}: Props) {
     /* Estados*/
     const [name, setName] = useState("");

@@ -1,17 +1,22 @@
 import { Pencil, Trash2 } from "lucide-react";
 import "./table.css";
 import { readAllProducts, deleteProduct } from "../../data/products";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
+import type {Dispatch, SetStateAction } from "react";
 import type { Product } from "../../data/products";
 
-export default function Table() {
-    // Armazena um array de `Product` (o type alias) e começa vazio
-    // Depois, ao chamar `setProducts(readAllProducts)`, ele será atualizado com os produtos do localStorage
-    const [products, setProducts] = useState<Product[]>([]); 
+/* Tipando as props vindas de app.jsx */
+type TableProps = {
+    products: Product[];
+    setProducts: Dispatch<SetStateAction<Product[]>>; 
+};
 
-    useEffect(() => {
-        setProducts(readAllProducts());
-    }, [])
+export default function Table({ products, setProducts } : TableProps ){
+    
+    /* Lista os produtos quando o componente é renderizado*/
+  useEffect(() => {
+    setProducts(readAllProducts());
+  }, []);
     
     function handleDelete(id: number) {
         deleteProduct(id)
