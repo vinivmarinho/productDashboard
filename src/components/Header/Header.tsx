@@ -2,8 +2,14 @@ import { Bell, Moon, Plus } from "lucide-react";
 import "./header.css";
 import { AddProductModal } from "../Modals/AddProductModal";
 import { useState } from "react";
+import type {Dispatch, SetStateAction } from "react";
+import type { Product } from "../../data/products";
 
-export default function Header() {
+type HeaderProps = {
+    setProducts: Dispatch<SetStateAction<Product[]>>;
+}
+
+export default function Header({setProducts}: HeaderProps) {
    
     const [modalIsOpen, setModalIsOpen] = useState(false);
 
@@ -12,7 +18,7 @@ export default function Header() {
     };
     function handleOpenModal() {
         setModalIsOpen(true)
-    };
+    }; 
 
     return(
         <header className="header">
@@ -38,7 +44,7 @@ export default function Header() {
                 </button>
             </div>
         {modalIsOpen && (
-            <AddProductModal onClose={handleCloseModal}/>
+            <AddProductModal onClose={handleCloseModal} setProducts={setProducts} />
         )}
 
         </header>   

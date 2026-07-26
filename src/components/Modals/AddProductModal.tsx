@@ -1,15 +1,18 @@
 import "./addProductModal.css";
 import { X } from "lucide-react";
 import { useState } from "react";
-import { createProduct } from "../../data/products";
+import { createProduct, readAllProducts } from "../../data/products";
 import { toast } from "react-toastify";
+import type { Dispatch, SetStateAction } from "react";
+import type { Product } from "../../data/products.ts";
 
 /*Define as propriedades que o componente AddProductModal recebe */
 type Props = {
     onClose: () => void;
+    setProducts: Dispatch<SetStateAction<Product[]>>;
 };
 
-export function AddProductModal({onClose}: Props) {
+export function AddProductModal({onClose, setProducts}: Props) {
     /* Estados*/
     const [name, setName] = useState("");
     const [price, setPrice] = useState("");
@@ -23,7 +26,7 @@ export function AddProductModal({onClose}: Props) {
         try {
             createProduct(name, category, Number(price), Number(stock), status);
             toast.success("Produto criado com sucesso");
-            
+            setProducts(readAllProducts);
         } catch(error) {
             toast.error("Erro ao criar o produto");
         }
