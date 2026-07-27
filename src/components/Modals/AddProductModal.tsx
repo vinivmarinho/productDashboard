@@ -102,9 +102,9 @@ export function AddProductModal({onClose, setProducts}: Props) {
                         required
                         >
                             <option value="" disabled selected>Categoria do produto</option>
-                            <option value="Electrônicos">Eletrônicos</option>
-                            <option value="Acessórios">Acessórios</option>
-                            <option value="Móveis">Móveis</option>
+                            <option value="electronics">Eletrônicos</option>
+                            <option value="accesories">Acessórios</option>
+                            <option value="furniture">Móveis</option>
                         </select>
                     </div>
 

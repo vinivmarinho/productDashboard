@@ -9,9 +9,11 @@ import type { Product } from "../../data/products";
 type TableProps = {
     products: Product[];
     setProducts: Dispatch<SetStateAction<Product[]>>; 
+    category: string;
 };
 
-export default function Table({ products, setProducts } : TableProps ){
+
+export default function Table({ products, setProducts, category } : TableProps ){
     
     /* Lista os produtos quando o componente é renderizado*/
   useEffect(() => {
@@ -36,12 +38,19 @@ export default function Table({ products, setProducts } : TableProps ){
             </thead>
 
             <tbody>
+                {/* TODO: Verificar categoria dos produtos */}
                 
                 {/* Mostrando os produtos salvos no localStorage */}
-                {products.map((product) => (
+                {products
+                // Filtra o array products com 2 possibilidades: 
+                // Se o estado "category" for igual a "all", todos os produtos retornam true e permanecem no array
+                // Caso contrário, mantém apenas os produtos que possuem "category" igual ao valor do estado "category"
+                .filter((product) => category === "all" || product.category === category)
+                .map((product) => (
+                    
                     <tr key={product.id}>    
-                        <td>{product.name}</td> 
-                        <td>{product.category}</td>
+                        <td>{product.name}</td>
+                        <td>{product.category === "electronics" ? "Eletrônicos" : product.category === "accessories" ? "Acessórios" : "Móveis"}</td> {/* Converte os valores internos da categoria para os nomes exibidos na interface */}
                         <td>R${product.price.toFixed(2)}</td>
                         <td>{product.stock}</td>
                         <td>

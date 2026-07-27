@@ -1,6 +1,15 @@
 import { Search, ChevronDown, SlidersHorizontal } from "lucide-react";
 import "./searchBar.css";
-export default function SearchBar() {
+import type { Dispatch, SetStateAction} from "react";
+
+type SearchBarProps = {
+    category: string;
+    setCategory: Dispatch<SetStateAction<string>>;
+};
+
+export default function SearchBar({category, setCategory}: SearchBarProps) {
+    
+
     return(
         <div className="toolbar">
             <div className="search-box">
@@ -13,11 +22,14 @@ export default function SearchBar() {
             </div>
         
         <div className="select-box">
-            <select>
-                <option>Todas as categorias</option>
-                <option>Eletrônicos</option>
-                <option>Acessórios</option>
-                <option>Móveis</option>
+            <select
+            value={category}
+            onChange={event => setCategory(event.target.value)}
+            >
+                <option value="all">Todas as categorias</option>
+                <option value="electronics">Eletrônicos</option>
+                <option value="accessories">Acessórios</option>
+                <option value="furniture">Móveis</option>
             </select>
 
             <ChevronDown size={18} />
@@ -38,6 +50,6 @@ export default function SearchBar() {
             <SlidersHorizontal size={18}/>
             Filtros
         </button>
-        </div> /* Última div*/
+        </div> 
     )
 }
