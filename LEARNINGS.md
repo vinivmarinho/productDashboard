@@ -21,3 +21,9 @@ Entretanto, os elementos `<input>` do formulário sempre retornam valores do tip
 **Solução adotada:**
 - Mantive os estados do formulário como `string`.
 - No momento da criação do produto (na chamada da função `createProduct`), converti os valores para `number`
+
+### Comunicação entre Componentes
+O componente `Table` era responsável por armazenar o estado dos produtos através do `useState`, porém a criação de novos produtos acontecia em um componente separado (`AddProductModal`). Como os componentes eram irmãos, o componente responsável pela criação não conseguia atualizar diretamente o estado da tabela através de props.
+**Solução adotada:**
+- Apliquei o conceito de "Lifting state up", movendo o estado dos produtos para o componente pai em comum (`App.tsx`)
+- O estado passou a ser compartilhado entre os componentes, permitindo que o `AddProductModal.tsx` notificasse a criação de um novo produto e o `Table.tsx` recebesse a lista atualizada através de props.
