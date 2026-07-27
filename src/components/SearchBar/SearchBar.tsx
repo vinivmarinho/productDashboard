@@ -50,6 +50,6 @@ export default function SearchBar({category, setCategory}: SearchBarProps) {
             <SlidersHorizontal size={18}/>
             Filtros
         </button>
-        </div> /* Última div*/
+        </div> 
     )
 }
