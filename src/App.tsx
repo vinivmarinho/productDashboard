@@ -12,9 +12,10 @@ function App() {
   // Armazena um array de `Product` (o Type Alias ) e começa vazio
   // setProducts é passado como props para "Table"
   const [products, setProducts] = useState<Product[]>([]);
-  // Armazena categoria de produtos. SearchBar.tsx é responsável pela alteração de valores
+  // Armazena categoria de produtos. SearchBar.tsx é responsável pela alteração de valores através do select
   const [category, setCategory] = useState("all");
-  
+  // Armazena ordem dos produtos. SearchBar.tsx é responsável pela alteração de valores através do select
+  const [order, setOrder] = useState("name-asc");
   return (
     <>
       <div className="main">
@@ -24,9 +25,9 @@ function App() {
         
         <div className="content">
           <Header setProducts={setProducts} />
-          <SearchBar category={category} setCategory={setCategory} />
+          <SearchBar category={category} setCategory={setCategory} order={order} setOrder={setOrder} />
           {/* TODO: Passar prop "products" e "setProducts"*/}
-          <Table products={products} setProducts={setProducts} category={category}  />
+          <Table products={products} setProducts={setProducts} category={category} order={order}  />
         </div>
       </div>
       <ToastContainer />

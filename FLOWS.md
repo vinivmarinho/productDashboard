@@ -14,3 +14,8 @@
 - Como o estado foi alterado, o `App.tsx` é renderizado novamente e passa o novo valor do estado para `Table.tsx`
 - `Table.tsx` recebe a categoria atual, filtra o estado `products` (estado que guarda o array dos produtos no localStorage), e se o estado `category` for diferente de `all`, ele remove os produtos que sejam diferentes do atual valor do estado de `category`
 
+## Filtro de ordem
+- Segue o mesmo processo do filtro de categoria, a diferença está em `Table.tsx`, onde eu:
+- Criei um objeto de estratégias de ordenação, onde cada valor possível do estado `order` (recebido de `App.tsx` e atualizado pelo `SearchBar.tsx` através de um `<select>`) corresponde a uma função de comparação usada pelo método `sort()`.
+- Criei um novo array a partir do estado `products`, que contém os produtos salvos no `localStorage`, utilizando o spread operator (`[...]`) para manter a imutabilidade do estado original. Em seguida, apliquei o `sort()` utilizando a função correspondente ao valor atual de `order`.
+

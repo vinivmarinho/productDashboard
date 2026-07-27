@@ -10,11 +10,22 @@ type TableProps = {
     products: Product[];
     setProducts: Dispatch<SetStateAction<Product[]>>; 
     category: string;
+    order: string;
 };
 
+/* Opções para organizar os produtos na tabela */
+// Record é um tipo utilitário que cria um objeto cujas chaves são do tipo string e os valores correspondem ao segundo tipo informado(a função)
+const sortOptions: Record<string, (a: Product, b: Product) => number> = {
+    "name-asc": (a, b) => a.name.localeCompare(b.name),
+    "name-desc": (a, b) => b.name.localeCompare(a.name),
+    "price-asc": (a, b) => a.price - b.price,
+    "price-desc": (a, b) => b.price - a.price
+};
 
-export default function Table({ products, setProducts, category } : TableProps ){
-    
+export default function Table({ products, setProducts, category, order } : TableProps ){
+    // Cria um novo array com base em `products` o faz um sorted baseado no valor do estado `order`
+    const sortedProducts = [...products].sort(sortOptions[order]);
+
     /* Lista os produtos quando o componente é renderizado*/
   useEffect(() => {
     setProducts(readAllProducts());
@@ -38,10 +49,10 @@ export default function Table({ products, setProducts, category } : TableProps )
             </thead>
 
             <tbody>
-                {/* TODO: Verificar categoria dos produtos */}
+                
                 
                 {/* Mostrando os produtos salvos no localStorage */}
-                {products
+                {sortedProducts
                 // Filtra o array products com 2 possibilidades: 
                 // Se o estado "category" for igual a "all", todos os produtos retornam true e permanecem no array
                 // Caso contrário, mantém apenas os produtos que possuem "category" igual ao valor do estado "category"

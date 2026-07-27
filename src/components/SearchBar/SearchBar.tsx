@@ -5,9 +5,11 @@ import type { Dispatch, SetStateAction} from "react";
 type SearchBarProps = {
     category: string;
     setCategory: Dispatch<SetStateAction<string>>;
+    order: string;
+    setOrder: Dispatch<SetStateAction<string>>;
 };
 
-export default function SearchBar({category, setCategory}: SearchBarProps) {
+export default function SearchBar({category, setCategory, order, setOrder}: SearchBarProps) {
     
 
     return(
@@ -36,11 +38,14 @@ export default function SearchBar({category, setCategory}: SearchBarProps) {
         </div>
 
         <div className="select-box">
-            <select>
-                <option>Ordenar por: Nome A-Z</option>
-                <option>Nome Z-A</option>
-                <option>Preço ↑</option>
-                <option>Preço ↓</option>
+            <select
+            value={order}
+            onChange={event => setOrder(event.target.value)}
+            >
+                <option value="name-asc">Ordenar por: Nome A-Z</option>
+                <option value="name-desc">Nome Z-A</option>
+                <option value="price-asc">Menor Preço</option>
+                <option value="price-desc">Maior preço</option>
             </select>
 
             <ChevronDown size={18} />
