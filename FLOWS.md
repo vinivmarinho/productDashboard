@@ -12,5 +12,5 @@
 - O estado `category` é criado em `App.tsx` e passado à `SearchBar.tsx`
 - Quando o usuário seleciona uma categoria no `<select>`, o `SearchBar.tsx` chama `setCategory()`, atualizando o estado em `App.tsx`.
 - Como o estado foi alterado, o `App.tsx` é renderizado novamente e passa o novo valor do estado para `Table.tsx`
-- `Table.tsx` recebe a categoria atual e renderiza apenas os produtos que possuam a propriedade `category` correspondente ao estado 
+- `Table.tsx` recebe a categoria atual, filtra o estado `products` (estado que guarda o array dos produtos no localStorage), e se o estado `category` for diferente de `all`, ele remove os produtos que sejam diferentes do atual valor do estado de `category`
 
