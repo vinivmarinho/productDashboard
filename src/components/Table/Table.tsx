@@ -9,9 +9,10 @@ import type { Product } from "../../data/products";
 type TableProps = {
     products: Product[];
     setProducts: Dispatch<SetStateAction<Product[]>>; 
+    category: string;
 };
 
-export default function Table({ products, setProducts } : TableProps ){
+export default function Table({ products, setProducts, category } : TableProps ){
     
     /* Lista os produtos quando o componente é renderizado*/
   useEffect(() => {
