@@ -32,7 +32,8 @@ export default function Table({ products, setProducts, category, order } : Table
   }, []);
     
     function handleDelete(id: number) {
-        deleteProduct(id)
+        deleteProduct(id);
+        setProducts(readAllProducts());
     };
 
     return(

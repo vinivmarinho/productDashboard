@@ -19,3 +19,11 @@
 - Criei um objeto de estratégias de ordenação, onde cada valor possível do estado `order` (recebido de `App.tsx` e atualizado pelo `SearchBar.tsx` através de um `<select>`) corresponde a uma função de comparação usada pelo método `sort()`.
 - Criei um novo array a partir do estado `products`, que contém os produtos salvos no `localStorage`, utilizando o spread operator (`[...]`) para manter a imutabilidade do estado original. Em seguida, apliquei o `sort()` utilizando a função correspondente ao valor atual de `order`.
 
+## Barra de pesquisar produtos
+- O valor digitado no `<input>` da barra de pesquisa é armazenado no estado `search`, que é atualizado a cada alteração através do evento `onChange`
+- Criei  um novo array (`filteredProducts`) a partir do estado `products`, contendo apenas os produtos cujo nome começa com o valor armazenado em `search`
+- Em `SearchBar.tsx`, fiz uma renderização condicional:
+    - Se `search` estiver vazio, nada é exibido
+    - Se `search` estiver preenchido e `filteredProducts` tiver produtos, os produtos são exibidos
+    - Caso contrário, mostro uma mensagem ao usuário
+

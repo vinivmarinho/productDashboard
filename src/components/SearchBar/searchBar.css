@@ -21,6 +21,8 @@
     border-radius: 12px;
 
     transition: .2s ease;
+
+    position: relative;
 }
 
 .search-box:focus-within {
@@ -45,6 +47,48 @@
 
 .search-box input::placeholder {
     color: #6B7280;
+}
+
+.suggestions {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    width: 100%;
+
+    background: #FFFFFF;
+    border: 1px solid #E5E7EB;
+    border-radius: 8px;
+
+    box-shadow: 0 8px 20px rgba(0, 0, 0, .12);
+
+    max-height: 220px;
+    overflow-y: auto;
+
+    z-index: 100;
+}
+
+.suggestion-item {
+    width: 100%;
+
+    border: none;
+    background: transparent;
+    text-align: left;
+
+    padding: 12px 16px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.suggestion-item:hover {
+    background: #f3f4f6;
+}
+
+.no-results {
+    margin: 0;
+    padding: 12px 16px;
+    color: #6B7280;
+    font-size: 14px;
+    text-align: center;
 }
 
 .select-box {

@@ -25,7 +25,7 @@ function App() {
         
         <div className="content">
           <Header setProducts={setProducts} />
-          <SearchBar category={category} setCategory={setCategory} order={order} setOrder={setOrder} />
+          <SearchBar category={category} setCategory={setCategory} order={order} setOrder={setOrder} products={products} />
           {/* TODO: Passar prop "products" e "setProducts"*/}
           <Table products={products} setProducts={setProducts} category={category} order={order}  />
         </div>

@@ -1,17 +1,23 @@
 import { Search, ChevronDown, SlidersHorizontal } from "lucide-react";
 import "./searchBar.css";
 import type { Dispatch, SetStateAction} from "react";
+import { useState } from "react"; 
+import type { Product } from "../../data/products.ts";
 
 type SearchBarProps = {
     category: string;
     setCategory: Dispatch<SetStateAction<string>>;
     order: string;
     setOrder: Dispatch<SetStateAction<string>>;
+    products: Product[]
 };
 
-export default function SearchBar({category, setCategory, order, setOrder}: SearchBarProps) {
+export default function SearchBar({category, setCategory, order, setOrder, products}: SearchBarProps) {
+    /* Estado do campo de pesquisa de produto */
+    const [search, setSearch] = useState("");
+    /* Produtos que contenham o texto passado ao estado search */
+    const filteredProducts = products.filter(product => product.name.toLowerCase().startsWith(search.toLowerCase()));
     
-
     return(
         <div className="toolbar">
             <div className="search-box">
@@ -19,8 +25,27 @@ export default function SearchBar({category, setCategory, order, setOrder}: Sear
                 <input
                     type="search"
                     placeholder="Buscar produto..."
+                    value={search}
+                    onChange={event => setSearch(event.target.value)}
                 >
                 </input>
+                {/* Mostrar lista de filteredProducts */}
+                <div className="suggestions">
+                    {search && (
+                        filteredProducts.length > 0 ? (
+                            filteredProducts.map((product) => (
+                                <button 
+                                key={product.id}
+                                className="suggestion-item"
+                                >
+                                    {product.name.toLowerCase()}
+                                </button>
+                            ))
+                        ) : (
+                            <p className="no-results">Nenhum produto encontrado</p>
+                        )
+                    )} 
+                </div>
             </div>
         
         <div className="select-box">
