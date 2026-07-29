@@ -68,7 +68,7 @@
     background-color: #5B21B6;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 770px) {
     .header {
         flex-direction: column;
         gap: 20px;

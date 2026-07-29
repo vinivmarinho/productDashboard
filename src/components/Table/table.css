@@ -1,3 +1,8 @@
+/* .table-container {
+    width: 100%;
+    overflow-x: auto;
+} */
+
 .products-table {
     width: 100%;
 
@@ -92,4 +97,31 @@
 
 .actions button:hover {
     background: #F3F4F6;
+}
+
+
+@media (max-width: 976px) {
+    .products-table th {
+        padding: 10px 15px;
+        font-size: 1.1rem;
+    }
+
+    .products-table td {
+        padding: 8px 8px;
+        font-size: 0.9rem;
+    }
+
+    .status {
+        padding: 2px 8px;
+        font-size: .9rem;
+    }
+
+    .actions {
+        gap: 7px;
+    }
+
+    .actions button {
+        width: 25px;
+        height: 25px;
+    }
 }
