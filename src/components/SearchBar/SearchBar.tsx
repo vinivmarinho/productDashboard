@@ -1,4 +1,4 @@
-import { Search, ChevronDown, SlidersHorizontal } from "lucide-react";
+import { Search, ChevronDown } from "lucide-react";
 import "./searchBar.css";
 import type { Dispatch, SetStateAction} from "react";
 import { useState } from "react"; 
