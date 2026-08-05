@@ -1,10 +1,11 @@
-/* .table-container {
+.table-container {
     width: 100%;
     overflow-x: auto;
-} */
+}
 
 .products-table {
     width: 100%;
+    min-width: 720px;
 
     border-collapse: collapse;
 
@@ -123,5 +124,21 @@
     .actions button {
         width: 25px;
         height: 25px;
+    }
+}
+
+@media (max-width: 480px) {
+    .products-table {
+        min-width: 640px;
+    }
+
+    .products-table th {
+        padding: 10px 12px;
+        font-size: 0.95rem;
+    }
+
+    .products-table td {
+        padding: 8px 10px;
+        font-size: 0.85rem;
     }
 }
