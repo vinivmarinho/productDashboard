@@ -5,13 +5,16 @@
     gap: 10px;
     width: 100%;
     margin-top: 24px;
+    flex-wrap: wrap;
 }
 .search-box {
     display: flex;
     align-items: center;
     gap: 12px;
 
-    width: 360px;
+    width: min(100%, 360px);
+    flex: 1 1 280px;
+    min-width: 0;
     height: 52px;
 
     padding: 0 18px;
@@ -96,7 +99,9 @@
     align-items: center;
     justify-content: space-between;
 
-    width: 360px;
+    width: min(100%, 360px);
+    flex: 1 1 280px;
+    min-width: 0;
     height: 52px;
 
     padding: 0 18px;
@@ -163,7 +168,7 @@
 
 @media (max-width: 976px) {
     .search-box {
-        width: 260px; /* Diminui em 100 */
+        width: min(100%, 260px);
         height: 52px;
         padding: 0 18px;
     }   
@@ -173,9 +178,40 @@
     }   
 
     .select-box {
-        width: 260px; /* Diminui em 100 */
+        width: min(100%, 260px);
         height: 52px;
 
         padding: 0 18px;
+    }
+}
+
+@media (max-width: 770px) {
+    .toolbar {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+        margin-top: 16px;
+    }
+
+    .search-box,
+    .select-box {
+        width: 100%;
+        flex: 1 1 auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .search-box,
+    .select-box {
+        height: 48px;
+        padding: 0 14px;
+    }
+
+    .search-box input {
+        font-size: 0.9rem;
+    }
+
+    .select-box select {
+        font-size: 0.9rem;
     }
 }
