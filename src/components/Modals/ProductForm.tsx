@@ -1,45 +1,58 @@
-import "./addProductModal.css";
+import "./productForm.css";
 import { X } from "lucide-react";
 import { useState } from "react";
-import { createProduct, readAllProducts } from "../../data/products";
+import { createProduct, readAllProducts, updateProduct } from "../../data/products.ts";
 import { toast } from "react-toastify";
 import type { Dispatch, SetStateAction } from "react";
 import type { Product } from "../../data/products.ts";
 
 /*Define as propriedades que o componente AddProductModal recebe */
-type Props = {
+type ProductFormProps = {
     onClose: () => void;
     setProducts: Dispatch<SetStateAction<Product[]>>;
+    product?: Product;
 };
 
-export function AddProductModal({onClose, setProducts}: Props) {
-    /* Estados*/
-    const [name, setName] = useState("");
-    const [price, setPrice] = useState("");
-    const [stock, setStock] = useState("");
-    const [status, setStatus] = useState("");
-    const [category, setCategory] = useState("");
+export function ProductForm({onClose, setProducts, product}: ProductFormProps) {
+    /* Se "product existir, preenche os estados com as propriedades. Caso contrário, estados começam vazios*/
+    const [name, setName] = useState(product?.name ?? "");
+    const [price, setPrice] = useState(product?.price ?? "");
+    const [stock, setStock] = useState(product?.stock ?? "");
+    const [status, setStatus] = useState(product?.status ?? "");
+    const [category, setCategory] = useState(product?.category ?? "");
 
-    /* Função que chama a criação do produto */
-    function  handleSubmit(event: React.SubmitEvent) {
+    /* Função que chama a criação ou edição do produto */
+
+    function handleSubmit(event: React.SubmitEvent) {
         event.preventDefault();
-        try {
-            createProduct(name, category, Number(price), Number(stock), status);
-            toast.success("Produto criado com sucesso");
-            setProducts(readAllProducts);
-        } catch(error) {
-            toast.error("Erro ao criar o produto");
-        }
-        onClose();
-    };
 
+        if (product) {
+            try {
+                updateProduct(product.id, {
+                    name, price: Number(price), stock: Number(stock), status, category
+                });
+                toast.success("Produto atualizado com sucesso")
+            } catch(error) {
+                toast.error("Erro ao atualizar o produto")
+            }
+        } else {
+            try {
+                createProduct(name, category, Number(price), Number(stock), status);
+                toast.success("Produto criado com sucesso");
+            } catch(error) {
+                toast.error("Erro ao cadastrar produto")
+            }
+        }
+        setProducts(readAllProducts()); 
+        onClose();
+    }
     return(
         <div className="modal-overlay">
             <div className="modal-content">
                 <button onClick={onClose} className="modal-close">
                     <X size={20}/>
                 </button>
-                <h2>Adicionar Produto</h2>
+                <h2>{product ? "Editar Produto" : "Adicionar Produto"}</h2>
 
                 <form onSubmit={handleSubmit}>
                     <div className="form-group">

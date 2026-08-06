@@ -1,6 +1,6 @@
 import { Bell, Moon, Plus } from "lucide-react";
 import "./header.css";
-import { AddProductModal } from "../Modals/AddProductModal";
+import { ProductForm } from "../Modals/ProductForm";
 import { useState } from "react";
 import type {Dispatch, SetStateAction } from "react";
 import type { Product } from "../../data/products";
@@ -44,7 +44,7 @@ export default function Header({setProducts}: HeaderProps) {
                 </button>
             </div>
         {modalIsOpen && (
-            <AddProductModal onClose={handleCloseModal} setProducts={setProducts} />
+            <ProductForm onClose={handleCloseModal} setProducts={setProducts} />
         )}
 
         </header>   

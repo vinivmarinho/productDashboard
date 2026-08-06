@@ -1,14 +1,15 @@
 import { Pencil, Trash2 } from "lucide-react";
 import "./table.css";
 import { readAllProducts, deleteProduct } from "../../data/products";
-import { useEffect } from "react";
-import type {Dispatch, SetStateAction } from "react";
+import { useEffect, useState } from "react";
+import type { Dispatch, SetStateAction } from "react";
 import type { Product } from "../../data/products";
+import { ProductForm } from "../Modals/ProductForm";
 
 /* Tipando as props vindas de app.jsx */
 type TableProps = {
     products: Product[];
-    setProducts: Dispatch<SetStateAction<Product[]>>; 
+    setProducts: Dispatch<SetStateAction<Product[]>>;
     category: string;
     order: string;
 };
@@ -22,21 +23,35 @@ const sortOptions: Record<string, (a: Product, b: Product) => number> = {
     "price-desc": (a, b) => b.price - a.price
 };
 
-export default function Table({ products, setProducts, category, order } : TableProps ){
+export default function Table({ products, setProducts, category, order }: TableProps) {
     // Cria um novo array com base em `products` o faz um sorted baseado no valor do estado `order`
     const sortedProducts = [...products].sort(sortOptions[order]);
+    const [modalIsOpen, setModalIsOpen] = useState(false);
+    const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
     /* Lista os produtos quando o componente é renderizado*/
-  useEffect(() => {
-    setProducts(readAllProducts());
-  }, []);
-    
+    useEffect(() => {
+        setProducts(readAllProducts());
+    }, []);
+
     function handleDelete(id: number) {
         deleteProduct(id);
         setProducts(readAllProducts());
     };
 
-    return(
+
+    /* Controla estado de modal */
+    function handleOpenModal(product : Product) {
+        setSelectedProduct(product);
+        setModalIsOpen(true);
+    };
+    function handleCloseModal() {
+        setSelectedProduct(null);
+        setModalIsOpen(false);
+    };
+
+
+    return (
         <div className="table-container">
             <table className="products-table">
                 <thead>
@@ -50,39 +65,43 @@ export default function Table({ products, setProducts, category, order } : Table
                     </tr>
                 </thead>
                 <tbody>
-            
-            
+
+
                     {/* Mostrando os produtos salvos no localStorage */}
                     {sortedProducts
-                    // Filtra o array products com 2 possibilidades:
-                    // Se o estado "category" for igual a "all", todos os produtos retornam true e permanecem no array
-                    // Caso contrário, mantém apenas os produtos que possuem "category" igual ao valor do estado "category"
-                    .filter((product) => category === "all" || product.category === category)
-                    .map((product) => (
-            
-                        <tr key={product.id}>
-                            <td>{product.name}</td>
-                            <td>{product.category === "electronics" ? "Eletrônicos" : product.category === "accessories" ? "Acessórios" : "Móveis"}</td> {/* Converte os valores internos da categoria para os nomes exibidos na interface */}
-                            <td>R${product.price.toFixed(2)}</td>
-                            <td>{product.stock}</td>
-                            <td>
-                                <span className={`status ${product.status}`}>
-                                    {product.status === "active" ? "Ativo" : "Inativo"}
-                                </span>
-                            </td>
-                            <td className="actions">
-                                <button>
-                                    <Pencil size={18}/>
-                                </button>
-                                <button onClick={() => handleDelete(product.id)}>
-                                    <Trash2 size={18} />
-                                </button>
-                            </td>
-                        </tr>
-                    ))}
-            
+                        // Filtra o array products com 2 possibilidades:
+                        // Se o estado "category" for igual a "all", todos os produtos retornam true e permanecem no array
+                        // Caso contrário, mantém apenas os produtos que possuem "category" igual ao valor do estado "category"
+                        .filter((product) => category === "all" || product.category === category)
+                        .map((product) => (
+
+                            <tr key={product.id}>
+                                <td>{product.name}</td>
+                                <td>{product.category === "electronics" ? "Eletrônicos" : product.category === "accessories" ? "Acessórios" : "Móveis"}</td> {/* Converte os valores internos da categoria para os nomes exibidos na interface */}
+                                <td>R${product.price.toFixed(2)}</td>
+                                <td>{product.stock}</td>
+                                <td>
+                                    <span className={`status ${product.status}`}>
+                                        {product.status === "active" ? "Ativo" : "Inativo"}
+                                    </span>
+                                </td>
+                                <td className="actions">
+                                    {/* Chamar handleOpenModal que chamará produto*/}
+                                    <button onClick={() => handleOpenModal(product)}>
+                                        <Pencil size={18} />
+                                    </button>
+                                    <button onClick={() => handleDelete(product.id)}>
+                                        <Trash2 size={18} />
+                                    </button>
+                                </td>
+                            </tr>
+                        ))}
+
                 </tbody>
             </table>
+            {modalIsOpen && selectedProduct && (
+                <ProductForm onClose={handleCloseModal} setProducts={setProducts} product={selectedProduct} />
+            )}
         </div>
     )
 }
